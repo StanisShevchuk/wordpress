@@ -1,0 +1,4 @@
+<?php 
+$nt_theme_options['menu_style1_number23'] = get_option('theme_phone');
+?>
+<a class="footer_tel" href="tel:<?php echo preg_replace('/\s+/', '',$nt_theme_options['menu_style1_number23']); ?>"><?php echo get_option('theme_phone'); ?></a>
