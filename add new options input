@@ -1,0 +1,112 @@
+in function.php
+
+
+
+/**
+* Добавляет блок для ввода контактных данных
+*/
+function mytheme_customize_register( $wp_customize ) {
+	/*
+	Добавляем секцию в настройки темы
+	*/
+	$wp_customize->add_section(
+	// ID
+	'data_site_section',
+	// Массив аргументов
+	array(
+	'title' => 'Дополнительная информация для сайта',
+	'capability' => 'edit_theme_options',
+	'description' => "Тут можно указать основные данные для сайта "    )
+	);
+	
+	
+   /*
+	Добавляем телефон 1
+	*/
+	$wp_customize->add_setting(
+		// ID
+		'theme_main_tel',
+		// Массив аргументов
+		array(
+		'default' => '',
+		'type' => 'option'
+		)
+		);
+		$wp_customize->add_control(
+		// ID
+		'theme_main_theme_main_telv',
+		// Массив аргументов
+		array(
+		'type' => 'text',
+		'label' => "Номер телефона основной",
+		'section' => 'data_site_section',
+		'settings' => 'theme_main_tel'
+		)
+		);
+		
+	/*
+	Добавляем email
+	*/
+	$wp_customize->add_setting(
+		// ID
+		'theme_main_email',
+		// Массив аргументов
+		array(
+		'default' => '',
+		'type' => 'option'
+		)
+		);
+		$wp_customize->add_control(
+		// ID
+		'theme_main_theme_main_email',
+		// Массив аргументов
+		array(
+		'type' => 'text',
+		'label' => "Основной email",
+		'section' => 'data_site_section',
+		'settings' => 'theme_main_email'
+		)
+		);
+		/*
+		Добавляем copyr
+		*/
+		$wp_customize->add_setting(
+		// ID
+		'theme_main_copyr',
+		// Массив аргументов
+		array(
+		'default' => '',
+		'type' => 'option'
+		)
+		);
+		$wp_customize->add_control(
+		// ID
+		'theme_main_theme_main_copyrv',
+		// Массив аргументов
+		array(
+		'type' => 'text',
+		'label' => "Текст копирайта в футере",
+		'section' => 'data_site_section',
+		'settings' => 'theme_main_copyr'
+		)
+		);
+
+	}
+	add_action( 'customize_register', 'mytheme_customize_register' );
+
+
+
+
+
+
+
+
+
+
+в основной файл (header.php , footer.php)
+
+
+<?php if( get_option('theme_main_email') ): ?>
+  <li class="email"><a href="mailto:<?php echo get_option('theme_main_email'); ?>"><?php echo get_option('theme_main_email'); ?></a></li>
+<?php endif; ?>
+
