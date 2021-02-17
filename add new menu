@@ -1,0 +1,21 @@
+in header.php or footer.php
+
+
+<?php 
+  wp_nav_menu( [
+    'theme_location'  => 'menu-4',
+    'menu'            => '',
+    'container'       => '', 
+    'container_class' => '', 
+    'container_id'    => '',
+    'menu_class'      => 'rd-navbar-nav', 
+    'menu_id'         => '',
+    'echo'            => true,
+    'before'          => '',
+    'after'           => '',
+    'link_before'     => '',
+    'link_after'      => '',
+    'items_wrap'      => '<ul id="%1$s" class="%2$s dflex">%3$s</ul>',
+    'depth'           => 1,
+   ] );
+?>
