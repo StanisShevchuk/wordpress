@@ -1,0 +1,20 @@
+add meta tags
+
+<meta property="og:title" content="<?php the_title(); ?>">
+    <meta property="og:description" content="<?php the_content();?>">
+    <meta property="og:url" content="<?php echo get_permalink(); ?>">
+    <meta property="og:image" content="<?php echo get_the_post_thumbnail_url(); ?>">
+
+
+    <meta name="twitter:title" content="<?php the_title(); ?>">
+   <meta name="twitter:description" content="<?php the_content();?>">
+   <meta name="twitter:image" content="<?php echo get_the_post_thumbnail_url(); ?>">
+   <meta name="twitter:card" content="summary_large_image">
+
+
+https://css-tricks.com/essential-meta-tags-social-media/
+
+
+and add btns
+
+https://www.addtoany.com/buttons/customize/standalone_services
