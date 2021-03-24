@@ -2,6 +2,8 @@
                         'post_type' => 'post',
                         'post_status' => 'publish',
                         'category_name' => 'wordpress',
+                        'orderby' => 'date',
+								        'order'   => 'DESC',
                         'posts_per_page' => 5,
                      );
                      $arr_posts = new WP_Query( $args );
