@@ -1,0 +1,26 @@
+<?php
+                                /**
+                                 * Field Structure:
+                                 *
+                                 * - parent_repeater (Repeater)
+                                 *   - parent_title (Text)
+                                 *   - child_repeater (Repeater)
+                                 *     - child_title (Text)
+                                 */
+                                if( have_rows('themefaq') ):
+                                    while( have_rows('themefaq') ) : the_row(); ?>
+                                        <div class="newtempl__title"><?php echo get_sub_field('title');?></div>                                  
+                                      <?php  // Get parent value.
+                                        // Loop over sub repeater rows.
+                                        if( have_rows('questionanswer') ):
+                                            while( have_rows('questionanswer') ) : the_row(); ?>
+                                            <div class="pageNav__tabList">
+                                                <div class="pageNav__tabItem"><?php echo get_sub_field('question');?></div>
+                                                <div class="pageNav__contentItem"><?php echo get_sub_field('answer');?></div>
+                                            </div>
+                                               <?php // Get sub value.
+                                            endwhile;
+                                        endif;
+                                    endwhile;
+                                endif;
+                            ?>
