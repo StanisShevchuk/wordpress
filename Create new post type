@@ -50,3 +50,26 @@ function getphoto_galer(){
     return $photo_galer;
 }
 
+
+
+
+
+
+//////// вивод
+
+
+
+<?php foreach (getphoto_galer() as $photo_galerv): ?>
+	            <a href="<?php echo $photo_galerv['url'] ?>" class="type_item slideInUp wow " data-wow-duration="0.7s" data-wow-offset="200">
+	        		<div class="text_item">
+	        			<div class="content_text_item">
+	        				<div class="title_item"><?php echo $photo_galerv['name'] ?></div>
+	        				<div class="types_categ">
+	        					<div class="descr"><?php echo $photo_galerv['descr_wel'] ?></div>
+	        				</div>
+	        			</div>
+	        		</div>
+	        		<div class="img_item" style="background-image: url(<?php echo $photo_galerv['main_photo'] ?>);">
+	    			</div>
+	        	</a>		
+            <?php endforeach; ?>
