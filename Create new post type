@@ -1,0 +1,52 @@
+
+
+
+
+
+// вставка блока для категорий фото
+add_action('init', function (){
+    register_post_type('photo_galer', array(
+        'labels'             => array(
+            'name'               => 'Основные категории', // Основное название типа записи
+            'singular_name'      => 'Основные категории', // отдельное название записи типа Book
+            'add_new'            => 'Добавить новую категорию',
+            'add_new_item'       => 'Добавить новую категорию',
+            'edit_item'          => 'Редактировать категорию',
+            'new_item'           => 'Новая категория',
+            'view_item'          => 'Посмотреть категорию',
+            'search_items'       => 'Найти категорию',
+            'not_found'          =>  'категории не найдено',
+            'not_found_in_trash' => 'В корзине категории не найдено',
+            'parent_item_colon'  => '',
+            'menu_name'          => 'Основные категории'
+
+          ),
+        'public'             => true,
+        'show_ui'            => true,
+        'menu_icon'          => 'dashicons-index-card',
+        'hierarchical'       => false,
+        'menu_position'      => 986,
+        'supports'           => array('title', 'thumbnail')
+    ) );
+});
+
+
+function getphoto_galer(){
+    $args = array(
+        'numberposts'  => 50,
+        'orderby'      => 'date',
+        'order'        => 'ASC',
+        'post_type'    => 'photo_galer',
+    );
+
+    $photo_galer = [];
+
+    foreach (get_posts($args) as $post) {
+        $photo_galerv         = get_fields($post->ID);
+        $photo_galerv['name'] = $post->post_title;
+        $photo_galerv['img'] = get_the_post_thumbnail_url($post->ID, 'full');
+        $photo_galer[] = $photo_galerv;
+    }
+    return $photo_galer;
+}
+
