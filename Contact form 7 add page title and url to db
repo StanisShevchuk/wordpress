@@ -1,7 +1,10 @@
 https://stackoverflow.com/questions/29374776/how-to-get-post-title-by-contact-form-7
 
 
+
 Install Contact Form 7 Dynamic Text Extension and use this code inside form In Form Tab of CF7
+
+все вставити в тіло форми
 
 [dynamichidden unique-name "CF7_get_post_var key='title'"]
 [dynamichidden page-url "CF7_URL"]
