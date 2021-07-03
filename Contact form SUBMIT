@@ -1,0 +1,3 @@
+document.addEventListener( 'wpcf7mailsent', function( event ) {
+      $("#magnific_btnopen").hide();
+}, false );
