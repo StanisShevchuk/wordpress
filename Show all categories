@@ -1,0 +1,11 @@
+<?php 
+    $categories = get_categories( array(
+        'orderby' => 'name',
+        'order'   => 'ASC',
+        'exclude' => '1, 5, 6',
+    ) );
+
+    foreach( $categories as $category ) {
+     echo '<div class="categ"><a href="' . get_category_link($category->term_id) . '">' . $category->name . '</a></div>';   
+    } 
+    ?>
