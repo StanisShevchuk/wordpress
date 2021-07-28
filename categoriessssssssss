@@ -1,0 +1,17 @@
+<!-- <?php 
+                        $categories = get_categories( array(
+                            'orderby' => 'name',
+                            'order'   => 'ASC',
+                            'taxonomy' => 'category',
+                            
+                        ) );
+
+                        foreach( $categories as $category ) {
+                        echo '<li><a href="' . get_category_link($category->term_id) . '">' . $category->name . '</a></li>';   
+                        } 
+                    ?> -->
+                    <?php 
+                        foreach( get_categories() as $category ){
+                            echo '<li class="category-button" data-category="' . $category->slug . '">' . $category->name . '</li>';
+                        }
+                    ?>
