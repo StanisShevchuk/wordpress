@@ -10,8 +10,47 @@
                         echo '<li><a href="' . get_category_link($category->term_id) . '">' . $category->name . '</a></li>';   
                         } 
                     ?> -->
+                    
+                    
+                    
+                    
+                    
                     <?php 
                         foreach( get_categories() as $category ){
                             echo '<li class="category-button" data-category="' . $category->slug . '">' . $category->name . '</li>';
                         }
                     ?>
+<div class="portfoliopage__body container filter-item">
+                <?php $args = array(
+                     'post_type' => 'keis',
+                     'post_status' => 'publish',
+                     'orderby' => 'date',
+                           'order'   => 'DESC',
+                     'posts_per_page' => 999,
+                           );
+                        $arr_posts = new WP_Query( $args );
+                  
+                           if ( $arr_posts->have_posts() ) :
+                  
+                        while ( $arr_posts->have_posts() ) :
+                        $arr_posts->the_post();
+                        ?>
+                        <a href="<?php the_field('ssylka_na_fajl'); ?>" target="_blank" data-categories="<?php 
+                                    foreach( get_the_category() as $category ){
+                                        echo '' . $category->slug . ',';
+                                    }
+                                ?>" class="portfoliopage__item box" style="background-image: url(<? the_post_thumbnail_url(); ?>);">
+                            <div class="portfoliopage__categories">
+                                 <?php 
+                                    foreach( get_the_category() as $category ){
+                                        echo '<span class="portfoliopage__cat">' . $category->name . '</span>';
+                                    }
+                                ?> 
+                            </div>
+                            <div class="portfoliopage__title"><?php the_title(); ?></div>
+                            <div class="portfoliopage__descr"> <?php the_field('kratkoe_opisanie'); ?></div>
+                        </a>
+                           <?php
+                        endwhile;
+                  endif; wp_reset_postdata();?>
+            </div>
