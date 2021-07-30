@@ -1,0 +1,29 @@
+<?php
+                $categories = get_terms( 'product_category', array(
+                    'hide_empty' => 0,
+                    ) );
+                    $subcategories = $categories;
+                    $subsubcategories = $subcategories;
+                    foreach ( $categories as $category ) {
+                        if ( 0 != $category->parent ) {
+                        continue;
+                        }
+                        echo '<h2>' . $category->name . '</h2>';
+                        echo '<ul>';
+                        foreach ( $subcategories as $subcategory ) {
+                            if ( $category->term_id != $subcategory->parent ) {
+                            continue;
+                            }
+                            ?><li><?php echo $subcategory->name?>
+                            <?php
+                             foreach ( $subsubcategories as $subsubcategory ) {
+                                    if ( $subcategory->term_id != $subsubcategory->parent ) {
+                                    continue;
+                                    }
+                                    echo '<div>' . $subsubcategory->name . '</div>';
+                                }
+                            echo'</li>';
+                        }
+                        echo '</ul>';
+                    }                    
+                ?>
