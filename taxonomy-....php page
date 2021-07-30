@@ -1,0 +1,18 @@
+Файл taxonomy-mytaxonomy.php
+
+<?php
+   $tax = get_query_var('taxonomy');
+   $term = get_query_var('term');
+   $loop = new WP_Query(array(
+       'tax_query' => array(
+            array(
+            'terms' => $term,
+            'taxonomy' => $tax,
+            'field' => 'slug',
+            'posts_per_page' => 50
+           )
+        )
+     )); ?>
+<?php while ($loop->have_posts()) : $loop->the_post(); ?>
+.........
+<?php endwhile; ?>
