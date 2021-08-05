@@ -1,0 +1,131 @@
+https://artisansweb.net/load-wordpress-post-ajax/
+
+function.php
+//
+//
+//
+
+function blog_scripts() {
+	// Register the script
+	wp_register_script( 'custom-script', get_stylesheet_directory_uri(). '/js/ajax.js', array('jquery'), false, true );
+
+	// Localize the script with new data
+	$script_data_array = array(
+		 'ajaxurl' => admin_url( 'admin-ajax.php' ),
+		 'security' => wp_create_nonce( 'load_more_posts' ),
+	);
+	wp_localize_script( 'custom-script', 'blog', $script_data_array );
+
+	// Enqueued script with localized data.
+	wp_enqueue_script( 'custom-script' );
+}
+add_action( 'wp_enqueue_scripts', 'blog_scripts' );
+
+add_action('wp_ajax_load_posts_by_ajax', 'load_posts_by_ajax_callback');
+add_action('wp_ajax_nopriv_load_posts_by_ajax', 'load_posts_by_ajax_callback');
+function load_posts_by_ajax_callback() {
+	check_ajax_referer('load_more_posts', 'security');
+	$paged = $_POST['page'];
+	$args = array(
+		 'post_type' => 'noone',
+		 'post_status' => 'publish',
+		 'posts_per_page' => '3',
+		 'paged' => $paged,
+	);
+	$blog_posts = new WP_Query( $args );
+	?>
+
+	<?php if ( $blog_posts->have_posts() ) : ?>
+		 <?php while ( $blog_posts->have_posts() ) : $blog_posts->the_post(); ?>
+		 		<div class="servrow__item  wow fadeIn" data-wow-duration="2s">
+					<div class="servrow__iteminside">
+						<div class="servrow__img" style="background-image: url(<? the_post_thumbnail_url(); ?>);"></div>
+						<div class="servrow__text">
+								<div class="servrow__title"><?php the_title(); ?> </div>
+								<div class="servrow__descr">
+								<?php the_content(); ?>
+								</div>
+						</div>
+					</div>
+				</div>
+		 <?php endwhile; ?>
+		 <?php
+	endif;
+
+	wp_die();
+}
+
+
+
+
+in file page-posts.php
+//
+//
+//
+//
+
+                <?php
+                $args = array(
+                    'post_type' => 'noone',
+                    'post_status' => 'publish',
+                    'posts_per_page' => '3',
+                    'paged' => 1,
+                );
+                $blog_posts = new WP_Query( $args );
+                ?>
+            
+                <?php if ( $blog_posts->have_posts() ) : ?>
+                    <div class="blog-posts servrow__inside">
+                        <?php while ( $blog_posts->have_posts() ) : $blog_posts->the_post(); ?>
+                            <div class="servrow__item  wow fadeIn" data-wow-duration="2s">
+                                <div class="servrow__iteminside">
+                                    <div class="servrow__img" style="background-image: url(<? the_post_thumbnail_url(); ?>);"></div>
+                                    <div class="servrow__text">
+                                        <div class="servrow__title"><?php the_title(); ?> </div>
+                                        <div class="servrow__descr">
+                                        <?php the_content(); ?>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endwhile; ?>
+                    </div>
+                    <?php
+                        
+                        if (  $blog_posts->max_num_pages > 1 )
+                            echo '
+                                    <div class=" loadmore servrow__btnmore wow fadeIn" data-wow-duration="1.5s">
+                                        <div class="purpbtn">Смотреть еще</div>
+                                    </div>
+                            '; 
+                    ?>
+                <?php endif; ?>
+                
+                
+                
+                
+                
+                
+//
+create file ajax.js
+//
+//
+var page = 2;
+jQuery(function ($) {
+   $('body').on('click', '.loadmore', function () {
+      var data = {
+         'action': 'load_posts_by_ajax',
+         'page': page,
+         'security': blog.security
+      };
+
+      $.post(blog.ajaxurl, data, function (response) {
+         if ($.trim(response) != '') {
+            $('.blog-posts').append(response);
+            page++;
+         } else {
+            $('.loadmore').hide();
+         }
+      });
+   });
+});
