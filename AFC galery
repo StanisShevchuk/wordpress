@@ -1,0 +1,15 @@
+<?php 
+                        
+    $images = get_sub_field('images_of_project');
+    $image_id = $images[0];
+    $size = 'full'; 
+    if( $images ): 
+?>     
+            <?php foreach( $images as $image ): ?>
+                <div class="item-slide">
+                    <a href="<?php echo $image?>">
+                    <img src="<?php echo $image?>" alt="">
+                    </a>
+                </div>
+            <?php endforeach; ?>
+    <?php endif; ?>
