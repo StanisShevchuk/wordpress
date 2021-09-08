@@ -1,0 +1,46 @@
+<section class="article-cta">
+    <div class="cta">
+        <?php
+			$prev_post = get_previous_post();
+			if( ! empty($prev_post) ){
+				?>
+            <a href="<?php echo get_permalink( $prev_post ); ?>">
+                <div class="img-con" style="background:url(<?php the_post_thumbnail_url($prevPost->ID);?>) center top;background-size:cover">
+                <?php 
+                    $prevPost = get_previous_post();
+                    $prevThumbnail = get_the_post_thumbnail( $prevPost->ID );
+                    previous_post_link( $prevThumbnail );
+                ?>
+                </div>
+                <div class="btn-txt">
+                    <span class="top">PREVIOUS ARTICLE</span>
+                    <span class="bottom"><?php echo esc_html($prev_post->post_title); ?></span>
+                </div>
+            </a>	 	
+				<?php
+			}
+		?>
+    </div>
+    <div class="cta">
+		 <?php
+			$next_post = get_next_post();
+			if( ! empty($next_post) ){
+				?>
+				<a href="<?php echo get_permalink( $next_post ); ?>">
+                <div class="btn-txt">
+                    <span class="top">Next Article</span>
+                    <span class="bottom"><?php echo esc_html($next_post->post_title); ?></span>
+                </div>
+                <div class="img-con" style="background:url(<?php the_post_thumbnail_url($nextPost->ID);?>) center top;background-size:cover">
+                    <?php 
+                        $nextPost = get_next_post();
+                        $nextThumbnail = get_the_post_thumbnail( $nextPost->ID );
+                        previous_post_link( $nextThumbnail );
+                    ?>
+                </div>
+            </a>
+				<?php
+			}
+		?>  
+    </div>
+</section>
