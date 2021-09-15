@@ -1,0 +1,58 @@
+https://site-style.by/vyvod-custom-categories-i-custom-post-types-wordpress/
+
+<?php
+                    $categories = get_categories(array(
+                        'type'                     => 'literature',
+                        'child_of'                 => 0,
+                        'parent'                   => '',
+                        'orderby'                  => 'ID',
+                        'order'                    => 'ASC',
+                        'hide_empty'               => 0,
+                        'hierarchical'             => 1,
+                        'exclude'                  => '',
+                        'include'                  => '',
+                        'number'                   => '',
+                        'taxonomy'                 => 'products_cat',
+                        'pad_counts'               => false )); 
+                       
+                        $args = array(
+                        'tax_query' => array(
+                            array(
+                                'taxonomy' => 'products_cat',
+                                'field' => 'id',
+                                'terms' => 18,
+                            )
+                        ),
+                        'post_type' => 'literature',
+                        'posts_per_page' => -1
+                    );
+                    $posts = get_posts( $args );
+                        if($posts) {
+                          
+                            foreach( $posts as $post ) :	?>
+                                <div class="col-md-4">
+                                    <a  href="<?php the_permalink(); ?>" class="post-item">
+                                        <div class="img">
+                                            <?php the_post_thumbnail( 'literat' );?>
+                                            <div class="meta">
+                                                <?php if(get_field('min_read')) { ?>
+                                                <span class="min-read">
+                                                    <svg width="12" height="10" viewBox="0 0 12 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M7.33366 8.33325H0.666992V9.66659H7.33366V8.33325ZM11.3337 2.99992H0.666992V4.33325H11.3337V2.99992ZM0.666992 6.99992H11.3337V5.66659H0.666992V6.99992ZM0.666992 0.333252V1.66659H11.3337V0.333252H0.666992Z" fill="#FF6659"/>
+                                                    </svg>
+                                                    <?php the_field('min_read'); ?> MIN
+                                                </span>
+                                                <?php } ?>
+                                                <span class="date"><?php echo get_the_date( 'F j, Y' ); ?></span>
+                                            </div>
+                                        </div>
+                                        <div class="text">
+                                            <span class="cat-label"><?php echo $cur_terms[0]->name; ?></span>
+                                            <h2><?php the_title(); ?></h2>
+                                        </div>
+                                    </a>
+                                </div>
+                                <?php
+                            endforeach;
+                        }
+                ?>
