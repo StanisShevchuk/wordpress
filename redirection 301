@@ -1,0 +1,5 @@
+on other categories (slugs)
+
+/article/(.*)
+/news/article/$1
+
