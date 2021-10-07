@@ -1,0 +1,9 @@
+install plugin "Contact Form 7 Dynamic Text Extension"
+https://support.advancedcustomfields.com/forums/topic/connection-with-contact-form-7/
+
+
+I’ve added this in my Form tab:
+[dynamichidden referencenumber "acf field='reference_number'"]
+
+And this in my Mail tab:
+Ref: [referencenumber]
