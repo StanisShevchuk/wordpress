@@ -1,0 +1,36 @@
+add_shortcode('blocklinks', 'show_blocklinks');
+function show_blocklinks(){
+    ob_start(); ?>
+
+    <div class="blocklinks">
+        <h2 class="blocklinks__title"><?php the_field('title_of_block2');?></h2>
+        <div class="blocklinks__row">
+            <?php while( have_rows('links2') ): the_row(); 
+                ?>
+                <a href="<?php the_sub_field('link'); ?>" class="blocklinks__item">
+                    <div class="blocklinks__itemimage" style="background-image: url(<?php the_sub_field('image'); ?>);"></div>
+                    <div class="blocklinks__itemtitle"><?php the_sub_field('title'); ?></div>
+                    <div><span class="read-more">Latest Prices <i class="la la-arrow-right"></i></span></div>
+                </a>
+            <?php endwhile; ?>
+        </div>
+    </div>
+
+    <?php $myreturn = ob_get_clean();
+    return $myreturn;
+}
+https://qna.habr.com/q/455825
+
+
+Виводимо: [blocklinks]
+
+
+
+обовязково!!!!!!
+
+ob_start();
+
+// сюда вставляешь весь код html и php с циклами или.... только не забывай открывать и закрывать <?php ?>
+
+$myreturn = ob_get_clean();
+return $myreturn;
