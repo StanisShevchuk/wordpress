@@ -1,0 +1,16 @@
+in function.php
+
+add_image_size( 'portfolio', 200, 200, true );
+add_image_size( 'portfolio-big', 312, 480, true );
+
+
+in display page
+<?php the_post_thumbnail('portfolio-big'); ?>
+or
+<a href="<?php the_permalink(); ?>" class=" ">
+  <?php the_post_thumbnail('portfolio-big'); ?>
+</a>
+
+
+add plugin Regenerate Thumbnails
+https://wordpress.org/plugins/regenerate-thumbnails/
