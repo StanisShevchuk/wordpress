@@ -1,0 +1,33 @@
+<nav class="navigation post-navigation" role="navigation" aria-label="Posts">
+                    <h2 class="screen-reader-text">Post navigation</h2>
+                    <div class="nav-links">
+                        <div class="nav-previous">
+                            <?php
+                            $prev_post = get_previous_post(true);
+                            if( ! empty($prev_post) ){
+                            ?>
+                            <a href="<?php echo get_permalink( $prev_post ); ?>" rel="prev" class="post-thumbnail">
+                                <?php echo get_the_post_thumbnail($prev_post, 'post-single' ); ?>
+                            </a>
+                            <a href="<?php echo get_permalink( $prev_post ); ?>" rel="prev"><p class="post-title-wrap"><span class="post-title h3"><?php echo esc_html($prev_post->post_title); ?></span></p></a>
+                                <?php
+                            }
+                            ?>
+                        </div>
+                        <div class="nav-next">
+                            <?php
+                            $next_post = get_next_post(true);
+                            if( ! empty($next_post) ){
+                                ?>
+                                <a href="<?php echo get_permalink( $next_post ); ?>" rel="next" class="post-thumbnail">
+                                    <?php echo get_the_post_thumbnail($next_post, 'post-single' ); ?>
+                                </a>
+                                <a href="<?php echo get_permalink( $next_post ); ?>" rel="next">
+                                    <p class="post-title-wrap"><span class="post-title h3"><?php echo esc_html($next_post->post_title); ?></span></p>
+                                </a>
+                                <?php
+                            }
+                            ?>
+                        </div>
+                    </div>
+                </nav>
