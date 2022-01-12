@@ -7,6 +7,7 @@
                                 'category__in' => $category_ids,
                                 'post__not_in' => array($post->ID),
                                 'showposts' => '3',
+                                'post_type' => 'post',
                                 'orderby' => 'rand',
                                 'ignore_sticky_posts' => '1',
                                 'no_found_rows' => true,
