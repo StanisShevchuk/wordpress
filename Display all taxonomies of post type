@@ -1,0 +1,7 @@
+<?php
+    the_taxonomies( array(
+        'before' =>'<div class="taxon">',
+      'after'  =>'</div>',
+        'sep'    =>', ',
+    ) );
+    ?>
