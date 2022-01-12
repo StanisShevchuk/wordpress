@@ -1,0 +1,4 @@
+<p><?php _e( 'Category: ', 'themename' ); the_category(', '); // Separated by commas ?></p>
+
+
+https://stackoverflow.com/questions/14128030/display-a-posts-category-within-the-wordpress-loop
