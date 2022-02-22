@@ -1,0 +1,41 @@
+<?php
+                $paged = get_query_var('paged') ? get_query_var('paged') : 1;
+                $arg_posts =  array(
+                    'orderby'      => 'date',
+                    //'order'        => 'ASC',
+                    'posts_per_page' => 100,
+                    'post_type' => 'post',
+                    'post_status' => 'publish',
+                    'cat'=> $cat_id,
+                    'paged' => $paged,
+                    'date_query' => array(
+                        array(
+                            'after'     => array( 
+                                'year'  => 2016,
+                                'month' => 12,
+                                'day'   => 31,
+                            ),
+                        ),
+                    ),
+                );
+                $query = new WP_Query($arg_posts);
+
+                ?>
+                <?php if ($query->have_posts() ) { ?>
+                <div class="news-list-wrap">
+                    <table class="news-list">
+                        <?php while ( $query->have_posts() ) : $query->the_post(); $p_id = get_the_ID(); $cur_terms = get_the_category( $p_id ); ?>
+                        <tr>
+                            <td><?php echo get_the_date('d M Y'); ?></td>
+                            <td><?php the_field('label'); ?></td>
+                            <td><a href="<?php the_field('external_link'); ?>" target="_blank"><?php if (get_field('icon')){ ?><i class="icon"><img src="<?php the_field('icon'); ?>" alt=""></i><?php } ?><span><?php the_title(); ?></span></a></td>
+                        </tr>
+                    <?php endwhile; ?>
+                    </table>
+                </div>
+                <?php } ?>
+                
+                
+                
+       https://stackoverflow.com/questions/45241364/how-can-i-use-query-posts-to-filter-posts-from-a-specific-year
+        https://misha.agency/wordpress/date_query.html
