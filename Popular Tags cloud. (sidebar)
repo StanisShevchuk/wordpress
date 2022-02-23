@@ -1,0 +1,12 @@
+<h2>Popular Tags</h2>
+    <div class="popular-tags">
+    <?php wp_tag_cloud( array(
+        'smallest' => 14, // size of least used tag
+        'largest'  => 28, // size of most used tag
+        'unit'     => 'px', // unit for sizing the tags
+        'number'   => 45, // displays at most 45 tags
+        'orderby'  => 'name', // order tags alphabetically
+        'order'    => 'ASC', // order tags by ascending order
+        'taxonomy' => 'post_tag' // you can even make tags for custom taxonomies
+    ) ); ?>
+    </div>
