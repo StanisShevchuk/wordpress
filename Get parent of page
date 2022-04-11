@@ -1,0 +1,18 @@
+You can use something like this to get the parent page URL (and show its page title):
+
+<?php if ( $post->post_parent ) { ?>
+ <a href="<?php echo get_permalink( $post->post_parent ); ?>" >
+    <?php echo get_the_title( $post->post_parent ); ?>
+ </a>
+<?php } ?>
+If you are running this code outside of the loop (thanks @BorisKuzmanov), then use this:
+
+<?php global $post;
+  if ( $post->post_parent ) { ?>
+    <a href="<?php echo get_permalink( $post->post_parent ); ?>" >
+    <?php echo get_the_title( $post->post_parent ); ?>
+    </a>
+<?php } ?>
+
+
+https://wordpress.stackexchange.com/questions/192895/get-parent-page-url-to-show-up-when-it-is-in-child-pages
