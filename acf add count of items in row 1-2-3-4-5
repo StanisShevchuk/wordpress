@@ -1,0 +1,14 @@
+<?php if( have_rows('questions') ): ?>
+ 	<?php $counter = 1;  //this sets up the counter starting at 0 ?>
+        <ul class="questions-answers">
+     
+        <?php while( have_rows('questions') ): the_row(); ?>
+            
+            <li><h3><a href="#"><?php the_sub_field('question_text'); ?></a></h3>
+            <p class="class_<?php echo $counter; // Prints the number of counted row ?>"><?php the_sub_field('answer_text'); ?></p>
+            <p><?php the_sub_field('answer_text'); ?></p></li>
+            <?php $counter++; // add one per row ?>  
+        <?php endwhile; ?>
+     
+        </ul>
+<?php endif; ?>
