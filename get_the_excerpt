@@ -1,0 +1,6 @@
+<?php 
+   $excerpt = get_the_excerpt(); 
+   $excerpt = substr( $excerpt, 0, 260 ); // Only display first 260 characters of excerpt
+   $result = substr( $excerpt, 0, strrpos( $excerpt, ' ' ) );
+   echo $result;
+?>
