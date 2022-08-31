@@ -1,0 +1,4 @@
+<?php if( is_user_logged_in('new_features') ) { ?>
+ This will display for WordPress admins only.
+
+<?php }; ?>
