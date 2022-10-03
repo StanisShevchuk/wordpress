@@ -1,0 +1,33 @@
+<?php 
+                        // global $post;
+                        $provider_info = $tv . ' - ' . $get_team; // some search text
+                        $myposts = get_posts([
+                            'post_type'  => 'channel',
+                            'title' => $provider_info,
+                        ]);
+                        if ( $myposts ) {
+                            foreach ( $myposts as $post ) : 
+                                setup_postdata( $post ); ?>
+                                <?php if( have_rows('stations') ): ?>
+                                    <figure class="wp-block-table is-style-stripes my-table">
+                                        <table >
+                                            <tbody>
+                                                <tr>
+                                                    <td class="has-text-align-left" data-align="left"><strong><strong>Local Station</strong></strong></td>
+                                                    <td><strong>Channel</strong></td>
+                                                </tr>
+                                                <?php while( have_rows('stations') ) : the_row(); ?>
+                                                <tr>
+                                                    <td class="has-text-align-left" data-align="left"><?php the_sub_field('local_station'); ?></td>
+                                                    <td><?php the_sub_field('channel'); ?></td>
+                                                </tr>
+                                                <?php endwhile; ?>
+                                            </tbody>
+                                        </table>
+                                    </figure>
+                                <?php endif; ?>
+                            <?php
+                            endforeach;
+                            wp_reset_postdata();
+                        }
+                    ?>
