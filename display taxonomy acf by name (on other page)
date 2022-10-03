@@ -1,0 +1,33 @@
+<?php                        
+$taxonomies = get_terms( array(
+    'taxonomy' => 'tv',
+    'name' => $tv,
+) );
+if ( !empty($taxonomies) ) :
+    foreach( $taxonomies as $category ) {
+        // echo $category->name;
+        $satellites = get_field('satellites', $category);
+        if( have_rows('satellites', $category) ): ?>
+            <figure class="wp-block-table is-style-stripes my-table">
+                <table style="margin-bottom:0;">
+                    <tbody>
+                        <tr>
+                            <td class="has-text-align-left" data-align="left"><strong><strong>Dish/Satellite</strong></strong></td>
+                            <td><strong>Channel</strong></td>
+                            <td><strong>Sign-up</strong></td>
+                        </tr>
+                        <?php while( have_rows('satellites', $category) ) : the_row(); ?>
+                        <tr>
+                            <td class="has-text-align-left" data-align="left"><?php the_sub_field('dishsatellite'); ?></td>
+                            <td><?php the_sub_field('channel'); ?></td>
+                            <td>
+                                <a href="<?php the_sub_field('sign-up_link'); ?>" class="single_service-btn">Sign up</a>
+                            </td>
+                        </tr>
+                        <?php endwhile; ?>
+                    </tbody>
+                </table>
+            </figure>
+        <?php endif; 
+    }
+endif; ?>
