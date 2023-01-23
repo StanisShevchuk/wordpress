@@ -1,0 +1,6 @@
+<?php
+												$attachment_id = get_sub_field('image');
+												$size = "organisation-img"; // (thumbnail, medium, large, full or custom size)
+												$image = wp_get_attachment_image_src( $attachment_id, $size );
+											?>
+											<img src="<?php echo $image[0]; ?>" />
